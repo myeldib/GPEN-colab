@@ -127,3 +127,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# No images/media in the repo (owner order 2026-11-08): samples, demos and outputs stay local.
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.bmp
+*.tif
+*.tiff
+*.mp4
+*.mkv
+*.mov
+*.avi
+# Binary tool archives
+ninja-linux.zip

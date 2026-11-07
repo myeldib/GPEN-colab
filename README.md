@@ -8,29 +8,6 @@
 _<sup>1</sup>[DAMO Academy, Alibaba Group](https://damo.alibaba.com), Hangzhou, China_  
 _<sup>2</sup>[Department of Computing, The Hong Kong Polytechnic University](http://www.comp.polyu.edu.hk), Hong Kong, China_
 
-#### Face Restoration
-
-<img src="figs/real_00.png" width="390px"/> <img src="figs/real_01.png" width="390px"/>
-<img src="figs/real_02.png" width="390px"/> <img src="figs/real_03.png" width="390px"/>
-
-<img src="figs/Solvay_conference_1927_comp.jpg" width="784px"/>
-
-#### Selfie Restoration
-
-<img src="figs/selfie_00.jpg" width="390px"/> <img src="figs/selfie_01.jpg" width="390px"/>
-
-#### Face Colorization
-
-<img src="figs/colorization_00.jpg" width="390px"/> <img src="figs/colorization_01.jpg" width="390px"/>
-
-#### Face Inpainting
-
-<img src="figs/inpainting_00.jpg" width="390px"/> <img src="figs/inpainting_01.jpg" width="390px"/>
-
-#### Conditional Image Synthesis (Seg2Face)
-
-<img src="figs/seg2face_00.jpg" width="390px"/> <img src="figs/seg2face_01.jpg" width="390px"/>
-
 ## News
 (2023-02-15) **GPEN-BFR-1024** and **GPEN-BFR-2048** are now publicly available. Please download them via \[[ModelScope2](https://www.modelscope.cn/models/damo/cv_gpen_image-portrait-enhancement-hires/summary)\].
 
@@ -122,9 +99,6 @@ CUDA_VISIBLE_DEVICES='0,1,2,3' python -m torch.distributed.launch --nproc_per_no
 When testing your own model, set ``--key g_ema``.
 
 Please check out ``run.sh`` for more details.
-
-## Main idea
-<img src="figs/architecture.png" width="784px"/> 
 
 ## Citation
 If our work is useful for your research, please consider citing:
