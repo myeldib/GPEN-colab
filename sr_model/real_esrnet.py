@@ -17,9 +17,9 @@ class RealESRNet(object):
     def load_srmodel(self, base_dir, model):
         self.srmodel = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=32, num_block=23, num_grow_ch=32, scale=self.scale)
         if model is None:
-            loadnet = torch.load(os.path.join(self.base_dir, 'weights', 'realesrnet_x%d.pth'%self.scale))
+            loadnet = torch.load(os.path.join(os.environ.get('GPEN_WEIGHTS_DIR', '/media/meldib/Backup/models/DDColor/GPEN-colab/weights'), 'realesrnet_x%d.pth'%self.scale))
         else:
-            loadnet = torch.load(os.path.join(self.base_dir, 'weights', model+'_x%d.pth'%self.scale))
+            loadnet = torch.load(os.path.join(os.environ.get('GPEN_WEIGHTS_DIR', '/media/meldib/Backup/models/DDColor/GPEN-colab/weights'), model+'_x%d.pth'%self.scale))
         #print(loadnet['params_ema'].keys)
         self.srmodel.load_state_dict(loadnet['params_ema'], strict=True)
         self.srmodel.eval()

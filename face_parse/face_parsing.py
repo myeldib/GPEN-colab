@@ -11,7 +11,7 @@ import torch.nn.functional as F
 
 class FaceParse(object):
     def __init__(self, base_dir='./', model='ParseNet-latest', device='cuda'):
-        self.mfile = os.path.join(base_dir, 'weights', model+'.pth')
+        self.mfile = os.path.join(os.environ.get('GPEN_WEIGHTS_DIR', '/media/meldib/Backup/models/DDColor/GPEN-colab/weights'), model+'.pth')
         self.size = 512
         self.device = device
 

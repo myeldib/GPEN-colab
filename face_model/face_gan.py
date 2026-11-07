@@ -14,7 +14,7 @@ from gpen_model import FullGenerator, FullGenerator_SR
 
 class FaceGAN(object):
     def __init__(self, base_dir='./', in_size=512, out_size=None, model=None, channel_multiplier=2, narrow=1, key=None, is_norm=True, device='cuda'):
-        self.mfile = os.path.join(base_dir, 'weights', model+'.pth')
+        self.mfile = os.path.join(os.environ.get('GPEN_WEIGHTS_DIR', '/media/meldib/Backup/models/DDColor/GPEN-colab/weights'), model+'.pth')
         self.n_mlp = 8
         self.device = device
         self.is_norm = is_norm

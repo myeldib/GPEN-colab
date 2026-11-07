@@ -20,7 +20,7 @@ class RetinaFaceDetection(object):
     def __init__(self, base_dir, device='cuda', network='RetinaFace-R50'):
         torch.set_grad_enabled(False)
         cudnn.benchmark = True
-        self.pretrained_path = os.path.join(base_dir, 'weights', network+'.pth')
+        self.pretrained_path = os.path.join(os.environ.get('GPEN_WEIGHTS_DIR', '/media/meldib/Backup/models/DDColor/GPEN-colab/weights'), network+'.pth')
         self.device = device #torch.cuda.current_device()
         self.cfg = cfg_re50
         self.net = RetinaFace(cfg=self.cfg, phase='test')

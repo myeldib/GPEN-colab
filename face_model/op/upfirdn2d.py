@@ -7,7 +7,8 @@ from torch.autograd import Function
 from torch.utils.cpp_extension import load, _import_module_from_library
 
 # if running GPEN without cuda, please comment line 10-18
-if platform.system() == 'Linux' and torch.cuda.is_available():
+# Set GPEN_NATIVE_OPS=1 to force pure PyTorch ops (needed for FP16 + torch.compile)
+if platform.system() == 'Linux' and torch.cuda.is_available() and not os.environ.get('GPEN_NATIVE_OPS'):
     module_path = os.path.dirname(__file__)
     upfirdn2d_op = load(
         'upfirdn2d',
@@ -147,7 +148,7 @@ class UpFirDn2d(Function):
 
 
 def upfirdn2d(input, kernel, up=1, down=1, pad=(0, 0), device='cpu'):
-    if platform.system() == 'Linux' and torch.cuda.is_available() and device != 'cpu':
+    if platform.system() == 'Linux' and torch.cuda.is_available() and device != 'cpu' and not os.environ.get('GPEN_NATIVE_OPS'):
         out = UpFirDn2d.apply(
             input, kernel, (up, up), (down, down), (pad[0], pad[1], pad[0], pad[1])
         )

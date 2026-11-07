@@ -8,7 +8,8 @@ from torch.autograd import Function
 from torch.utils.cpp_extension import load, _import_module_from_library
 
 # if running GPEN without cuda, please comment line 11-19
-if platform.system() == 'Linux' and torch.cuda.is_available():
+# Set GPEN_NATIVE_OPS=1 to force pure PyTorch ops (needed for FP16 + torch.compile)
+if platform.system() == 'Linux' and torch.cuda.is_available() and not os.environ.get('GPEN_NATIVE_OPS'):
     module_path = os.path.dirname(__file__)
     fused = load(
         'fused',
@@ -90,7 +91,7 @@ class FusedLeakyReLU(nn.Module):
 
 
 def fused_leaky_relu(input, bias, negative_slope=0.2, scale=2 ** 0.5, device='cpu'):
-    if platform.system() == 'Linux' and torch.cuda.is_available() and device != 'cpu':
+    if platform.system() == 'Linux' and torch.cuda.is_available() and device != 'cpu' and not os.environ.get('GPEN_NATIVE_OPS'):
         return FusedLeakyReLUFunction.apply(input, bias, negative_slope, scale)
     else:
         return scale * F.leaky_relu(input + bias.view((1, -1)+(1,)*(len(input.shape)-2)), negative_slope=negative_slope)
